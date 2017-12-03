@@ -1,0 +1,17 @@
+<div class="text-center"></div>
+{{#if playing}}
+  {{#if winner}}
+    <div>
+      Player {{winner}} Won!
+    </div>
+  {{/if}}
+  {{#if draw}}
+    Let's call it a draw.
+  {{/if}}
+  <button {{action 'start'}}>Restart</button>
+{{else}}
+    <button {{action 'start'}}>Start!</button>
+{{/if}}
+
+
+<canvas id="stage" width="380" height="380"></canvas>

@@ -1,3 +1,4 @@
+/* Generic Styles */
 body {
     font-family: monospace;
     font-size: 12pt;
@@ -18,11 +19,11 @@ a {
 #app {
     max-width: 400px;
     background: #000000;
-    border: 2px solid #EB2900;
+    border: 2px solid #678900;
 }
 /* Header styling */
 header h1 {
-    background: #EB2900;
+    background: #678900;
     color: #ffffff;
     margin: 0;
     padding: 0.5rem;
@@ -44,7 +45,7 @@ article h2 {
 }
 /* Footer styling */
 footer {
-    background: #EB2900;
+    background: #678900;
     color: #ffffff;
     font-size: 0.6rem;
     padding: 0.2rem 0.3rem;
@@ -53,7 +54,4 @@ footer:after {
     content: ' ';
     display: table;
     clear: both;
-}
-::-webkit-scrollbar {
-    display: none;
 }

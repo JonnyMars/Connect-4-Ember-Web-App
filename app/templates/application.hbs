@@ -1,5 +1,13 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<section id="app">
+    <header>
+        <h1>{{#link-to 'con4'}}Connect 4 Pal{{/link-to}}</h1>
+    </header>
+    <article>
+        {{outlet}}
+    </article>
+    <footer>
+        <div class="float-left">
+            | JONNY MARS |
+        </div>
+    </footer>
+</section>
