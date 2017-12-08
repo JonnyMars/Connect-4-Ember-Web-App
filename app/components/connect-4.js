@@ -80,6 +80,8 @@ export default Ember.Component.extend({
 
         var y = 5;
         var state = this.get('state');
+
+        console.log(state);
         while (state[x][y] == 'b' || state[x][y] == 'g'){
           y = y - 1;
         }
@@ -106,8 +108,43 @@ export default Ember.Component.extend({
           }
           this.get('stage').update();
         }
+        this.check_winner();
       }
     }
+  },
+
+  check_winner: function() {
+    var patterns = [
+    [[0, 0], [0, 1], [0, 2], [0, 3]],
+    [[0, 1], [0, 2], [0, 3], [0, 4]],
+    [[0, 2], [0, 3], [0, 4], [0, 5]]
+  ];
+  console.log('Hello')
+
+  var state = this.get('state');
+  for(var pidx = 0; pidx < patterns.length; pidx++) {
+    var pattern = patterns[pidx];
+    var winner = state[pattern[0][0]][pattern[0][1]];
+
+    if(winner) {
+
+      for(var idx = 1; idx < pattern.length; idx++) {
+
+        if(winner != state[pattern[idx][0]][pattern[idx][1]]){
+          winner = undefined;
+          console.log(winner);
+          break;
+        }
+      }
+      if(winner){
+        this.set('winner', winner);
+        console.log(winner);
+        break;
+
+      }
+    }
+  }
+
   },
 
   actions: {
