@@ -92,6 +92,7 @@ export default Ember.Component.extend({
 
         // if(!state[x][y]) {
         if(y >= 0){
+          createjs.Sound.play('place-marker');
           var player = this.get('player');
           state[x][y] = player;
 
@@ -230,6 +231,7 @@ export default Ember.Component.extend({
       if(winner){
         this.set('winner', winner);
         console.log(winner);
+        createjs.Sound.play('winner');
         break;
 
       }
@@ -242,8 +244,20 @@ export default Ember.Component.extend({
     start: function() {
       var board = this.get('board');
       board.alpha = 0;
-      createjs.Tween.get(board).to({alpha: 1}, 1000);
-      
+
+      if(this.get('playing')) {
+        var markers = this.get('markers');
+        for(var idx = 0; idx < 22; idx++){
+          createjs.Tween.get(markers.g[idx]).to({y: 600}, 500);
+          createjs.Tween.get(markers.b[idx]).to({y: 600}, 500);
+        }
+        createjs.Sound.play('falling');
+        createjs.Tween.get(board).wait(500).to({alpha: 1}, 1000);
+      } else {
+        createjs.Tween.get(board).to({alpha: 1}, 1000);
+      }
+
+
       this.set('playing', true);
       this.set('winner', undefined);
       this.set('draw', false);
@@ -258,12 +272,16 @@ export default Ember.Component.extend({
         this.set('moves', {'b': 0, 'g': 0});
         this.set('player', 'g');
         var markers = this.get('markers');
-        for(var idx = 0; idx < 22; idx++){
-          markers.b[idx].visible = false;
-          markers.g[idx].visible = false;
-        }
+
         this.get('stage').update();
       }
+    },
+
+    init: function() {
+      this._super(...arguments);
+      createjs.Sound.registerSound('assets/sounds/click.wav', 'place-marker');
+      createjs.Sound.registerSound('assets/sounds/falling.mp3', 'falling');
+      createjs.Sound.registerSound('assets/sounds/win.wav', 'winner');
     },
 
 
