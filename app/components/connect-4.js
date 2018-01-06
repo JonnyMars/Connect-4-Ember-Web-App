@@ -38,6 +38,9 @@ export default Ember.Component.extend({
 
     board.x = 20;
     board.y = 40;
+    board.alpha = 0;
+    this.set('board', board);
+    stage.addChild(board);
 
     var markers = {
       'b': [],
@@ -66,7 +69,7 @@ export default Ember.Component.extend({
     this.set('markers', markers);
     this.set('stage', stage);
     stage.addChild(board);
-    stage.update();
+    createjs.Ticker.addEventListener("tick", stage);
   },
 
   click: function(ev) {
@@ -237,6 +240,10 @@ export default Ember.Component.extend({
 
   actions: {
     start: function() {
+      var board = this.get('board');
+      board.alpha = 0;
+      createjs.Tween.get(board).to({alpha: 1}, 1000);
+      
       this.set('playing', true);
       this.set('winner', undefined);
       this.set('draw', false);
