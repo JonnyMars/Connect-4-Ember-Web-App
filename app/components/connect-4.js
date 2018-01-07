@@ -273,6 +273,11 @@ export default Ember.Component.extend({
 
   actions: {
     start: function() {
+      //toast plugin for cordova mobile app. Pop up message.
+      if(window.plugins && window.plugins.toast){
+        window.plugins.toast.showShortBottom('Green to play First.');
+      }
+
       var board = this.get('board');
       board.alpha = 0; //If game is restarted, this will make the board fade out back to being transparrent.
       if(this.get('playing')) {
